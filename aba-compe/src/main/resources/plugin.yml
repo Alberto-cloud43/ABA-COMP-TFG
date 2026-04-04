@@ -1,0 +1,16 @@
+name: ABACompe
+main: org.example.Main
+version: 1.0
+api-version: 1.20
+commands:
+  map:
+  match:
+  start:
+    description: Inicia la cuenta atrás de la partida
+  end:
+    description: Fuerza el fin de la partida
+  cycle:
+    description: Cambia de mapa
+  stats:
+    description: Ver stats de un jugador
+    usage: /stats [jugador]

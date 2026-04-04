@@ -1,0 +1,600 @@
+map:
+  name: "Abstract"
+  version: "1.1.2"
+  objective: "Capture the other team's wool to win!"
+  authors:
+    - uuid: "dff980ed-9f69-491e-b79c-30c21350baf2"
+  teams:
+    red:
+      id: "red"
+      name: "Red"
+      color: "red"
+      max: 5
+    blue:
+      id: "blue"
+      name: "Blue"
+      color: "blue"
+      max: 5
+  spectator:
+    x: -51
+    y: 38
+    z: -78
+  spawns:
+    red:
+      - { x: 12.5,  y: 4,   z: -74.5, yaw: 90 }
+      - { x: 22.5,  y: 55,  z: -74.5, yaw: 90 }
+      - { x: 22.5,  y: 103, z: -74.5, yaw: 90 }
+      - { x: 22.5,  y: 151, z: -74.5, yaw: 90 }
+      - { x: 22.5,  y: 199, z: -74.5, yaw: 90 }
+      - { x: 22.5,  y: 247, z: -74.5, yaw: 90 }
+    blue:
+      - { x: -115.5, y: 4,   z: -82.5, yaw: -90 }
+      - { x: -125.5, y: 55,  z: -82.5, yaw: -90 }
+      - { x: -125.5, y: 103, z: -82.5, yaw: -90 }
+      - { x: -125.5, y: 151, z: -82.5, yaw: -90 }
+      - { x: -125.5, y: 199, z: -82.5, yaw: -90 }
+      - { x: -125.5, y: 247, z: -82.5, yaw: -90 }
+    default:
+      - { x: -51.5, y: 37, z: -78.5 }
+  kits:
+    spawn:
+      force: true
+      items:
+        - slot: 0
+          material: "stone_sword"
+          unbreakable: true
+        - slot: 1
+          material: "bow"
+          unbreakable: true
+        - slot: 2
+          material: "iron_pickaxe"
+          unbreakable: true
+          enchantments:
+            efficiency: 1
+        - slot: 3
+          material: "iron_axe"
+          unbreakable: true
+        - slot: 4
+          material: "cooked_beef"
+          amount: 64
+        - slot: 5
+          material: "oak_planks"
+          amount: 8
+          damage: 1
+        - slot: 6
+          material: "sandstone"
+          amount: 12
+
+        - slot: 8
+          material: "golden_apple"
+
+        - slot: 28
+          material: "arrow"
+          amount: 18
+
+      armor:
+        leggings:
+          material: "chainmail_leggings"
+          unbreakable: true
+          enchantments:
+            protection_projectile: 2
+
+    red-kit:
+      parents: ["spawn"]
+      armor:
+        helmet:
+          material: "leather_helmet"
+          unbreakable: true
+          color: "993333"
+          enchantments:
+            protection_projectile: 1
+
+        chestplate:
+          material: "leather_chestplate"
+          unbreakable: true
+          color: "993333"
+          enchantments:
+            protection_projectile: 2
+
+        boots:
+          material: "leather_boots"
+          unbreakable: true
+          color: "993333"
+          enchantments:
+            protection_projectile: 1
+
+    blue-kit:
+      parents: ["spawn"]
+      armor:
+        helmet:
+          material: "leather_helmet"
+          unbreakable: true
+          color: "334CB2"
+          enchantments:
+            protection_projectile: 1
+
+        chestplate:
+          material: "leather_chestplate"
+          unbreakable: true
+          color: "334CB2"
+          enchantments:
+            protection_projectile: 2
+
+        boots:
+          material: "leather_boots"
+          unbreakable: true
+          color: "334CB2"
+          enchantments:
+            protection_projectile: 1
+
+  kill-rewards:
+    - items:
+        - material: "sandstone"
+          amount: 4
+        - material: "arrow"
+          amount: 6
+        - material: "golden_apple"
+
+  filters:
+
+    only-blue:
+      team: "blue"
+
+    only-red:
+      team: "red"
+
+    spawn1:
+      not:
+        time: "200s"
+
+    spawn2:
+      all:
+        - time: "200s"
+        - not:
+            time: "400s"
+
+    spawn3:
+      all:
+        - time: "400s"
+        - not:
+            time: "600s"
+
+    spawn4:
+      all:
+        - time: "600s"
+        - not:
+            time: "800s"
+
+    spawn5:
+      all:
+        - time: "800s"
+        - not:
+            time: "1000s"
+
+    spawn6:
+      all:
+        - time: "1000s"
+
+    in-cyan-wool:
+      any:
+        - not:
+            any:
+              - team: "blue"
+              - material: "wood:1"
+              - material: "wool:9"
+              - material: "nether_brick"
+              - material: "stained_glass:9"
+              - material: "carpet:9"
+              - material: "step"
+              - material: "nether_brick_stairs"
+              - material: "chest"
+              - material: "stained_clay:9"
+              - material: "stained_clay:15"
+              - material: "sandstone"
+              - material: "thin_glass"
+              - material: "mob_spawner"
+
+    in-orange-wool:
+      any:
+        - not:
+            any:
+              - team: "red"
+              - material: "wood:1"
+              - material: "wool:1"
+              - material: "nether_brick"
+              - material: "stained_glass:1"
+              - material: "carpet:1"
+              - material: "step"
+              - material: "nether_brick_stairs"
+              - material: "chest"
+              - material: "stained_clay:1"
+              - material: "stained_clay:15"
+              - material: "sandstone"
+              - material: "thin_glass"
+              - material: "mob_spawner"
+
+    no-spawners:
+      not:
+        any:
+          - material: "mob_spawner"
+          - material: "gold_plate"
+          - material: "iron_plate"
+          - material: "stone_plate"
+
+    only-red-chest:
+      all:
+        - team: "red"
+        - material: "chest"
+
+    only-blue-chest:
+      all:
+        - team: "blue"
+        - material: "chest"
+
+    no-nether-brick:
+      not:
+        material: "nether_brick"
+
+    no-void:
+      not:
+        void: true
+  delete-on-start:
+  - material: "white_stained_glass"
+  regions:
+
+    red-portal:
+      type: cuboid
+      min: "20,2,-77"
+      max: "25,3,-72"
+
+    blue-portal:
+      type: cuboid
+      min: "-128,2,-85"
+      max: "-123,3,-80"
+
+    regions:
+      type: union
+      children:
+        - type: rectangle
+          min: "-6,-53"
+          max: "-13,-60"
+        - type: rectangle
+          min: "-13,-63"
+          max: "-20,-71"
+        - type: rectangle
+          min: "-13,-89"
+          max: "-7,-96"
+        - type: rectangle
+          min: "-21,-90"
+          max: "-28,-85"
+        - type: rectangle
+          min: "-20,-71"
+          max: "-28,-78"
+        - type: rectangle
+          min: "-29,-79"
+          max: "-35,-83"
+        - type: rectangle
+          min: "-29,-56"
+          max: "-35,-50"
+        - type: rectangle
+          min: "-35,-57"
+          max: "-68,-100"
+        - type: rectangle
+          min: "-68,-101"
+          max: "-74,-107"
+        - type: rectangle
+          min: "-74,-74"
+          max: "-68,-78"
+        - type: rectangle
+          min: "-82,-73"
+          max: "-75,-67"
+        - type: rectangle
+          min: "-83,-86"
+          max: "-75,-79"
+        - type: rectangle
+          min: "-90,-86"
+          max: "-83,-94"
+        - type: rectangle
+          min: "-90,-97"
+          max: "-97,-104"
+        - type: rectangle
+          min: "-96,-68"
+          max: "-90,-61"
+        - type: rectangle
+          min: "-83,-80"
+          max: "-93,-85"
+        - type: rectangle
+          min: "-93,-79"
+          max: "-83,-85"
+        - type: rectangle
+          min: "-14,-44"
+          max: "-19,-95"
+        - type: rectangle
+          min: "-4,-59"
+          max: "15,-53"
+        - type: rectangle
+          min: "-14,-44"
+          max: "-48,-48"
+        - type: rectangle
+          min: "-34,-56"
+          max: "-29,-77"
+        - type: rectangle
+          min: "-5,-95"
+          max: "15,-89"
+        - type: rectangle
+          min: "-84,-62"
+          max: "-89,-113"
+        - type: rectangle
+          min: "-90,-114"
+          max: "-54,-108"
+        - type: rectangle
+          min: "-73,-78"
+          max: "-68,-99"
+        - type: rectangle
+          min: "-68,-57"
+          max: "-73,-72"
+        - type: rectangle
+          min: "-96,-60"
+          max: "-118,-67"
+        - type: rectangle
+          min: "-29,-83"
+          max: "-33,-99"
+        - type: rectangle
+          min: "-98,-102"
+          max: "-117,-97"
+
+
+
+
+        - id: "south-blue-wool-lane"
+          type: rectangle
+          min: "-112,-61"
+          max: "-119,-73"
+        
+
+        - id: "north-blue-wool-lane"
+          type: rectangle
+          min: "-112,-104"
+          max: "-119,-92"
+
+        - id: "south-red-wool-lane"
+          type: rectangle
+          min: "16,-65"
+          max: "9,-53"
+
+        - id: "north-red-wool-lane"
+          type: rectangle
+          min: "9,-96"
+          max: "16,-84"
+
+        - id: "orange-wool"
+          type: cuboid
+          min: "9,9,-69"
+          max: "16,20,-80"
+
+        - id: "cyan-wool"
+          type: cuboid
+          min: "-112,9,-77"
+          max: "-119,20,-88"
+
+        - id: "red-spawn-exit"
+          type: rectangle
+          min: "9,-78"
+          max: "-6,-71"
+
+        - id: "blue-spawn-exit"
+          type: rectangle
+          min: "-97,-79"
+          max: "-112,-86"
+
+        - id: "red-spawn"
+          type: cuboid
+          min: "9,0,-69"
+          max: "16,9,-80"
+
+        - id: "blue-spawn"
+          type: cuboid
+          min: "-112,0,-77"
+          max: "-119,9,-88"
+
+    build-region:
+      type: complement
+      base: "regions"
+      subtract:
+        - id: "center-level-1"
+          type: cuboid
+          min: "-35,0,-58"
+          max: "-68,1,-100"
+
+    spawners:
+      type: union
+      children:
+        - type: cuboid
+          min: "-58,10,-110"
+          max: "-57,12,-111"
+        - type: cuboid
+          min: "-46,10,-46"
+          max: "-45,12,-47"
+        - type: cuboid
+          min: "-51,3,-78"
+          max: "-52,5,-79"
+        - type: cuboid
+          min: "-69,4,-64"
+          max: "-68,6,-63"
+        - type: cuboid
+          min: "-34,4,-93"
+          max: "-35,6,-94"
+
+    apply:
+      - enter: "only-red"
+        region: "cyan-wool"
+        message: "Only Red may enter this wool room!"
+
+      - enter: "only-blue"
+        region: "orange-wool"
+        message: "Only Blue may enter this wool room!"
+
+      - block: "never"
+        message: "You may not modify the spawn exits."
+        region:
+          - "red-spawn-exit"
+          - "blue-spawn-exit"
+          - "red-spawn"
+          - "blue-spawn"
+
+      - block: "in-cyan-wool"
+        use: "only-red-chest"
+        region: "cyan-wool"
+        message: "Only Red can modify nether brick fences here."
+
+      - block: "in-orange-wool"
+        use: "only-blue-chest"
+        region: "orange-wool"
+        message: "Only Blue can modify nether brick fences here."
+
+      - block: "no-spawners"
+        region: "spawners"
+        message: "You may not edit the spawners."
+
+      - block: "no-nether-brick"
+        region:
+          - "center-level-1"
+        message: "You may not modify blocks outside the playing area."
+
+      - block: "no-void"
+        region:
+          - negative:
+              region: "build-region"
+        message: "You may not modify blocks outside the playing area."
+
+  portals:
+    red:
+      region: "red-portal"
+      x: 12.5
+      y: 4
+      z: -74.5
+      yaw: 90
+
+    blue:
+      region: "blue-portal"
+      x: -115.5
+      y: 4
+      z: -82.5
+      yaw: -90
+
+  toolrepair:
+    tools:
+      - "stone_sword"
+      - "bow"
+      - "iron_pickaxe"
+      - "iron_axe"
+
+  itemremove:
+    items:
+      - "potion"
+      - "golden_apple"
+      - "cooked_beef"
+      - "wood"
+      - "nether_brick"
+      - "nether_fence"
+      - "nether_brick_stairs"
+      - "step"
+      - "wool:11"
+      - "wool:14"
+      - "chainmail_chestplate"
+      - "leather_helmet"
+      - "leather_chestplate"
+      - "chainmail_leggings"
+      - "leather_boots"
+      - "wood_plate"
+      - "wood_button"
+      - "spruce_fence"
+      - "spruce_fence_gate"
+      - "wood_step"
+      - "spruce_door"
+      - "spruce_wood_stairs"
+      - "workbench"
+      - "stained_clay"
+      - "sandstone:2"
+      - "ladder"
+
+  renewables:
+    - interval: "10s"
+      grow: true
+      particles: true
+      sound: true
+      avoid-entities: true
+      region:
+        - "-56.5,11,-110.5"
+        - "-46.5,11,-46.5"
+      renew-filter:
+        materials:
+          - "melon"
+
+  block-drops:
+    - wrong-tool: true
+      region:
+        - "-56.5,11,-110.5"
+        - "-46.5,11,-46.5"
+      filter:
+        materials:
+          - "melon"
+      tools:
+        - "stone_sword"
+        - "iron_sword"
+        - "diamond_sword"
+        - "iron_axe"
+        - "stone_axe"
+        - "wooden_axe"
+        - "golden_axe"
+      drops:
+        - material: "arrow"
+          amount: 16
+
+  destroyables:
+    materials: "stained_glass"
+    completion: "0%"
+    required: false
+    show: false
+    mode-changes: true
+    list:
+      - name: "monu"
+        owner: "red"
+        region:
+          type: cuboid
+          min: "-97,0,-43"
+          max: "-6,1,-114"
+
+      - name: "monu"
+        owner: "blue"
+        region:
+          type: cuboid
+          min: "-97,0,-43"
+          max: "-6,1,-114"
+
+  modes:
+    - after: "0s"
+      material: "air"
+      show-before: 0
+
+  wools:
+    - team: "red"
+      color: "cyan"
+      location: "-115.5,13,-82.5"
+      monument:
+        block: "15.5,5,-74.5"
+
+    - team: "blue"
+      color: "orange"
+      location: "12.5,13,-74.5"
+      monument:
+        block: "-118.5,5,-82.5"
+
+  timelock: "on"
+
+  maxbuildheight: 14
+  minbuildheight: 0
+
+  time:
+    result: "objectives"
+    limit: "20m"
