@@ -1,0 +1,10 @@
+<div class="card-box">
+  <h3>{{ title }}</h3>
+
+  <ul>
+    <li *ngFor="let player of players">
+      <span>{{ player.name }}</span>
+      <span>{{ player.value }}</span>
+    </li>
+  </ul>
+</div>
