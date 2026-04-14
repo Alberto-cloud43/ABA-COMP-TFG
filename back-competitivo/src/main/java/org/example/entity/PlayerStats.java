@@ -35,4 +35,10 @@ public class PlayerStats {
 
     /** Fecha de creación del registro en formato ISO 8601. */
     private String createdAt;
+
+    /** Daño infligido. */
+    private int damageDone;
+
+    /** Daño recibido. */
+    private int damageTaken;
 }

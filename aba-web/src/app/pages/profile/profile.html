@@ -1,1 +1,61 @@
-<p>profile works!</p>
+<div class="page">
+
+  <div class="hero">
+    <div class="hero-box">
+      <h1 class="title">{{ player?.username ?? username }}</h1>
+      <p class="subtitle">Estadísticas del jugador</p>
+    </div>
+  </div>
+
+  <div style="max-width: 1100px; margin: 80px auto; padding: 0 20px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+
+      <div class="stat-card">
+        <p class="stat-label">Kills</p>
+        <p class="stat-value">{{ player?.kills }}</p>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">Deaths</p>
+        <p class="stat-value">{{ player?.deaths }}</p>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">Wins</p>
+        <p class="stat-value">{{ player?.wins }}</p>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">Losses</p>
+        <p class="stat-value">{{ player?.losses }}</p>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">Daño hecho</p>
+        <p class="stat-value">{{ player?.damageDone }}</p>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">Daño recibido</p>
+        <p class="stat-value">{{ player?.damageTaken }}</p>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">Lanas colocadas</p>
+        <p class="stat-value">{{ player?.woolsPlaced }}</p>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">Tiempo jugado</p>
+        <p class="stat-value">{{ player?.playTime }}</p>
+      </div>
+
+      <div class="stat-card">
+        <p class="stat-label">Miembro desde</p>
+        <p class="stat-value" style="font-size: 20px;">{{ player?.createdAt }}</p>
+      </div>
+
+    </div>
+  </div>
+
+</div>

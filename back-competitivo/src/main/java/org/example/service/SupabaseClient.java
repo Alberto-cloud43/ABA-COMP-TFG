@@ -15,7 +15,7 @@ import java.util.List;
 public class SupabaseClient {
 
     /** URL de la tabla player_stats en Supabase. */
-    private final String url = "https://fiyinrjnpkwmllzkpnsj.supabase.co/rest/v1/player_stats";
+    private final String url = "https://fiyinrjnpkwmllzkpnsj.supabase.co/rest/v1/jugadores";
 
     /** Clave de API pública de Supabase. */
     private final String key = "sb_publishable_3hsCpcNVmlgYWXINwHpYkQ_Ti-ZpanW";
