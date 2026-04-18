@@ -5,9 +5,9 @@ export interface PlayerStats {
   deaths: number;
   wins: number;
   losses: number;
-  woolsPlaced: number;
-  playTime: number;
-  createdAt: string;
-  damageDone: number;
-  damageTaken: number;
+  wools_placed: number;
+  time_played: number;
+  created_at: string;
+  damage_done: number;
+  damage_taken: number;
 }

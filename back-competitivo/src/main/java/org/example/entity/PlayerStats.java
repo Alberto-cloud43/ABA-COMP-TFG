@@ -1,5 +1,6 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 /**
@@ -28,17 +29,22 @@ public class PlayerStats {
     private int losses;
 
     /** Número de lanas colocadas en el monumento. */
+    @JsonProperty("wools_placed")
     private int woolsPlaced;
 
     /** Tiempo total jugado en segundos. */
+    @JsonProperty("time_played")
     private long playTime;
 
     /** Fecha de creación del registro en formato ISO 8601. */
+    @JsonProperty("created_at")
     private String createdAt;
 
     /** Daño infligido. */
+    @JsonProperty("damage_done")
     private int damageDone;
 
     /** Daño recibido. */
+    @JsonProperty("damage_taken")
     private int damageTaken;
 }

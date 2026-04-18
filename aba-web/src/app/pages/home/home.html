@@ -13,12 +13,11 @@
 </div>
 
   <!-- PODIO -->
-  <div class="podium">
-    <app-top-card class="card left" title="Top Distancia"></app-top-card>
-    <app-top-card class="card center" title="Top Kills"></app-top-card>
-    <app-top-card class="card right" title="Top Jugadores"></app-top-card>
-  </div>
-
+<div class="podium">
+  <app-top-card class="card left" title="Top Tiempo" metric="time_played" [data]="topPlayTime"></app-top-card>
+  <app-top-card class="card center" title="Top Kills"     metric="kills"    [data]="topKills"></app-top-card>
+  <app-top-card class="card right"  title="Top Jugadores" metric="wins"     [data]="topWins"></app-top-card>
+</div>
   <!-- INFO -->
  <div class="info-section">
 

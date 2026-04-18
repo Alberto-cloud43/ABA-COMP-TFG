@@ -32,27 +32,27 @@
 
       <div class="stat-card">
         <p class="stat-label">Daño hecho</p>
-        <p class="stat-value">{{ player?.damageDone }}</p>
+        <p class="stat-value">{{ player?.damage_done }}</p>
       </div>
 
       <div class="stat-card">
         <p class="stat-label">Daño recibido</p>
-        <p class="stat-value">{{ player?.damageTaken }}</p>
+        <p class="stat-value">{{ player?.damage_taken }}</p>
       </div>
 
       <div class="stat-card">
         <p class="stat-label">Lanas colocadas</p>
-        <p class="stat-value">{{ player?.woolsPlaced }}</p>
+        <p class="stat-value">{{ player?.wools_placed }}</p>
       </div>
 
       <div class="stat-card">
         <p class="stat-label">Tiempo jugado</p>
-        <p class="stat-value">{{ player?.playTime }}</p>
+        <p class="stat-value">{{ formatPlayTime(player?.time_played) }}</p>
       </div>
 
       <div class="stat-card">
         <p class="stat-label">Miembro desde</p>
-        <p class="stat-value" style="font-size: 20px;">{{ player?.createdAt }}</p>
+        <p class="stat-value" style="font-size: 20px;">{{ player?.created_at | date:'dd/MM/yyyy' }}</p>
       </div>
 
     </div>

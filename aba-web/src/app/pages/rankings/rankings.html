@@ -1,0 +1,50 @@
+<div class="page">
+
+  <div class="hero">
+    <div class="hero-box">
+      <h1 class="title">Rankings</h1>
+      <p class="subtitle">Compara a todos los jugadores por estadística</p>
+    </div>
+  </div>
+
+  <div class="rankings-container">
+
+    <div class="metric-selector">
+      <button
+        *ngFor="let m of metrics"
+        class="metric-btn"
+        [class.active]="selectedMetric === m.key"
+        (click)="selectMetric(m.key)">
+        {{ m.label }}
+      </button>
+    </div>
+
+    <div class="table-wrapper">
+      <p *ngIf="!players.length" class="state">Cargando...</p>
+
+      <table *ngIf="players.length">
+        <thead>
+          <tr>
+            <th class="col-rank">#</th>
+            <th class="col-username">Jugador</th>
+            <th class="col-value">{{ metrics[selectedMetricIndex]?.label }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let player of players; let i = index">
+            <td class="rank">
+              <span *ngIf="i === 0">🥇</span>
+              <span *ngIf="i === 1">🥈</span>
+              <span *ngIf="i === 2">🥉</span>
+              <span *ngIf="i > 2">{{ i + 1 }}</span>
+            </td>
+            <td class="username">{{ player.username }}</td>
+            <td class="value">{{ formatValue(player) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>

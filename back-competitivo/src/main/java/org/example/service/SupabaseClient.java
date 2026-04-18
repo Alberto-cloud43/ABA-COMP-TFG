@@ -44,7 +44,7 @@ public class SupabaseClient {
     public List<PlayerStats> getAllPlayers() {
         HttpEntity<String> entity = new HttpEntity<>(headers());
         ResponseEntity<PlayerStats[]> response = restTemplate.exchange(
-                url,
+                url + "?select=*",
                 HttpMethod.GET,
                 entity,
                 PlayerStats[].class
