@@ -1,0 +1,61 @@
+<div class="page">
+
+  <button class="crear-clan-btn" routerLink="/registro-clan">+ Crear clan</button>
+  <app-btn-perfil></app-btn-perfil>
+
+  <div class="hero">
+    <div class="hero-box">
+      <h1 class="title">CLANES</h1>
+      <p class="subtitle">Busca un clan y consulta sus estadísticas.</p>
+
+      <div class="search-container">
+        <input [(ngModel)]="clanSearch" placeholder="Buscar clan..." (keyup.enter)="search()" />
+        <button (click)="search()">
+          <svg viewBox="0 0 24 24" class="icon">
+            <circle cx="11" cy="11" r="7" stroke="white" stroke-width="2" fill="none"/>
+            <line x1="16" y1="16" x2="21" y2="21" stroke="white" stroke-width="2"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RANKING DE CLANES -->
+  <div class="rankings-container">
+
+  <h2 class="ranking-title">🏆 Ranking de Clanes</h2>
+
+  <div class="table-wrapper">
+    <p *ngIf="!clanes.length" class="state">Cargando clanes...</p>
+
+    <table *ngIf="clanes.length">
+      <thead>
+        <tr>
+          <th class="col-rank">#</th>
+          <th class="col-username">Clan</th>
+          <th class="col-value">Victorias</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let clan of clanes; let i = index" (click)="irAClan(clan.nombre_clan)" class="clan-row">
+          <td class="rank">
+            <span *ngIf="i === 0">🥇</span>
+            <span *ngIf="i === 1">🥈</span>
+            <span *ngIf="i === 2">🥉</span>
+            <span *ngIf="i > 2">{{ i + 1 }}</span>
+          </td>
+          <td class="username">{{ clan.nombre_clan }}</td>
+          <td class="value">{{ clan.wins }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+  <div class="footer-actions">
+    <button class="home-btn" routerLink="/">Volver al inicio</button>
+  </div>
+
+</div>

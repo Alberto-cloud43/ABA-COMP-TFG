@@ -1,0 +1,36 @@
+<div class="page">
+
+  <app-btn-perfil></app-btn-perfil>
+
+  <div class="hero">
+    <div class="hero-box">
+      <h1 class="title">CREAR CLAN</h1>
+      <p class="subtitle">Crea tu clan y supera al resto en el ranking junto a tus amigos</p>
+    </div>
+  </div>
+
+  <div class="form-container">
+    <div class="form-box">
+
+      <h2>Nombra tu nuevo clan</h2>
+
+      <input
+        [(ngModel)]="nombreClan"
+        placeholder="Nombre del clan"
+        type="text"
+        (keyup.enter)="crear()"
+      />
+
+      <p class="error" *ngIf="error">{{ error }}</p>
+      <p class="success" *ngIf="mensaje">{{ mensaje }}</p>
+
+      <button (click)="crear()" [disabled]="cargando">
+        {{ cargando ? 'Creando...' : 'Crear clan' }}
+      </button>
+
+      <button class="home-btn" routerLink="/clanes-home">Volver a clanes</button>
+
+    </div>
+  </div>
+
+</div>

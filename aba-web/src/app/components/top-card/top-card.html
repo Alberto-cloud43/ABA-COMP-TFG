@@ -1,0 +1,13 @@
+<div class="card-box" (click)="goToRankings()">
+  <h3>{{ title }}</h3>
+
+  <p *ngIf="!players.length" class="state">Cargando...</p>
+
+  <ul *ngIf="players.length">
+    <li *ngFor="let player of players; let i = index">
+      <span class="rank rank-{{ i + 1 }}">{{ i + 1 }}</span>
+      <span class="name">{{ player.name }}</span>
+      <span class="value">{{ player.value }}</span>
+    </li>
+  </ul>
+</div>

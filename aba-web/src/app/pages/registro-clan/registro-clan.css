@@ -1,0 +1,148 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(circle at top, rgba(229, 9, 20, 0.12), transparent 45%),
+    linear-gradient(180deg, #0a0a0a, #111111);
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+.hero {
+  width: 100%;
+  padding: 70px 20px;
+  background: linear-gradient(135deg, #1a0000, #2b0000);
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.6),
+    inset 0 0 60px rgba(229, 9, 20, 0.12);
+}
+
+.hero-box {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 54px;
+  font-weight: 900;
+  margin: 0;
+  background: linear-gradient(45deg, #ffffff, #ff5a5a);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  margin-top: 10px;
+  color: #ffb3b3;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding: 60px 20px;
+}
+
+.form-box {
+  width: 100%;
+  max-width: 480px;
+  background: linear-gradient(180deg, #171717, #111111);
+  border: 1px solid rgba(229, 9, 20, 0.18);
+  border-radius: 24px;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow:
+    0 0 40px rgba(229, 9, 20, 0.1),
+    inset 0 0 20px rgba(255,255,255,0.02);
+}
+
+.form-box h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: white;
+}
+
+.form-box input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem 1.2rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  color: white;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border 0.25s ease, box-shadow 0.25s ease;
+}
+
+.form-box input::placeholder {
+  color: #888;
+}
+
+.form-box input:focus {
+  border: 1px solid rgba(229, 9, 20, 0.4);
+  box-shadow: 0 0 18px rgba(229, 9, 20, 0.18);
+}
+
+.form-box button {
+  padding: 1rem;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #c40000, #ff2d2d);
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  box-shadow: 0 0 20px rgba(229, 9, 20, 0.25);
+}
+
+.form-box button:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 30px rgba(229, 9, 20, 0.4);
+  opacity: 0.95;
+}
+
+.form-box button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.home-btn {
+  background: rgba(255,255,255,0.03) !important;
+  border: 1px solid rgba(229, 9, 20, 0.25) !important;
+  box-shadow: none !important;
+}
+
+.home-btn:hover {
+  background: rgba(229, 9, 20, 0.08) !important;
+  border-color: rgba(229, 9, 20, 0.45) !important;
+}
+
+.error {
+  color: #ff5a5a;
+  font-size: 0.92rem;
+  text-align: center;
+  margin: 0;
+}
+
+.success {
+  color: #6dff8d;
+  font-size: 0.92rem;
+  text-align: center;
+  margin: 0;
+}
+
+.hero-box {
+  text-align: center;
+}
