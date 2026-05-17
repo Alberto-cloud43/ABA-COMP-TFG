@@ -7,7 +7,7 @@
         <h1>{{ stats.username }}</h1>
         <p class="since">Desde {{ stats.created_at | date:'MMM yyyy' }}</p>
       </div>
-      <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
+      <button class="logout-btn" *ngIf="esPropietario" (click)="logout()">Cerrar sesión</button>
     </div>
 
     <div class="stats-grid">
@@ -67,25 +67,56 @@
     <p class="error" *ngIf="error">{{ error }}</p>
 
     <div class="footer-actions">
-      <button class="home-btn" routerLink="/">Volver al inicio</button>
 
-      <div class="contra-section">
-        <input
-          type="password"
-          class="contra-input"
-          placeholder="Nueva contraseña"
-          [(ngModel)]="nuevaContra"
-        />
-        <input
-          type="password"
-          class="contra-input"
-          placeholder="Confirmar contraseña"
-          [(ngModel)]="confirmarContra"
-        />
-        <button class="contra-btn" (click)="cambiarContra()">Cambiar contraseña</button>
-        <p class="modal-error"   *ngIf="errorContra">{{ errorContra }}</p>
-        <p class="modal-success" *ngIf="mensajeContra">{{ mensajeContra }}</p>
-      </div>
+      <ng-container *ngIf="esPropietario">
+
+        <!-- Desplegable: Unirse a clan -->
+        <div class="accordion">
+          <button class="accordion-header" (click)="toggleClan()">
+            <span>⚔️ Unirse a un clan</span>
+            <span class="accordion-arrow" [class.open]="clanAbierto">▼</span>
+          </button>
+          <div class="accordion-body" [class.visible]="clanAbierto">
+            <input
+              type="text"
+              class="contra-input"
+              placeholder="Nombre del clan"
+              [(ngModel)]="nuevoClan"
+            />
+            <button class="contra-btn" (click)="cambiarClan()">Unirse al clan</button>
+            <p class="modal-error"   *ngIf="errorClan">{{ errorClan }}</p>
+            <p class="modal-success" *ngIf="mensajeClan">{{ mensajeClan }}</p>
+          </div>
+        </div>
+
+        <!-- Desplegable: Cambiar contraseña -->
+        <div class="accordion">
+          <button class="accordion-header" (click)="toggleContra()">
+            <span>🔒 Cambiar contraseña</span>
+            <span class="accordion-arrow" [class.open]="contraAbierto">▼</span>
+          </button>
+          <div class="accordion-body" [class.visible]="contraAbierto">
+            <input
+              type="password"
+              class="contra-input"
+              placeholder="Nueva contraseña"
+              [(ngModel)]="nuevaContra"
+            />
+            <input
+              type="password"
+              class="contra-input"
+              placeholder="Confirmar contraseña"
+              [(ngModel)]="confirmarContra"
+            />
+            <button class="contra-btn" (click)="cambiarContra()">Cambiar contraseña</button>
+            <p class="modal-error"   *ngIf="errorContra">{{ errorContra }}</p>
+            <p class="modal-success" *ngIf="mensajeContra">{{ mensajeContra }}</p>
+          </div>
+        </div>
+
+      </ng-container>
+
+      <button class="home-btn" routerLink="/">Volver al inicio</button>
 
     </div>
 

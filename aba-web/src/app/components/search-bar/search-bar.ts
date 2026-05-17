@@ -17,7 +17,7 @@ export class SearchBar {
 
   search() {
     if (this.searchName.trim()) {
-      this.router.navigate(['/profile', this.searchName.trim()]);
+      this.router.navigate(['/perfil', this.searchName.trim()]);
       this.searchName = '';
     }
   }

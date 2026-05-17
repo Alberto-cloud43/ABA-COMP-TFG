@@ -1,11 +1,16 @@
 package org.example.service;
 
 import org.example.entity.PlayerStats;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.*;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 
@@ -134,5 +139,153 @@ public class SupabaseClient {
         return response.getStatusCode().is2xxSuccessful();
     }
 
+    /**
+     * Obtiene el ID de un clan a partir de su nombre.
+     *
+     * @param nombreClan nombre del clan
+     * @return ID del clan, o {@code null} si no existe
+     */
+    public Integer getIdClanByNombre(String nombreClan) {
+        HttpEntity<String> entity = new HttpEntity<>(headers());
+
+        String nombreNormalizado = nombreClan.trim().toLowerCase();
+        String queryUrl = "https://fiyinrjnpkwmllzkpnsj.supabase.co/rest/v1/clan?nombre_clan=ilike.*" + nombreNormalizado + "*&select=id";
+
+        System.out.println(">>> URL: " + queryUrl);
+
+        ResponseEntity<List<Map<String, Object>>> response = restTemplate.exchange(
+                queryUrl,
+                HttpMethod.GET,
+                entity,
+                new ParameterizedTypeReference<List<Map<String, Object>>>() {}
+        );
+
+        List<Map<String, Object>> result = response.getBody();
+        System.out.println(">>> body: " + result);
+
+        return (result != null && !result.isEmpty()) ? ((Number) result.get(0).get("id")).intValue() : null;
+    }
+
+    /**
+     * Devuelve todos los jugadores cuyo id_clan coincida con el ID indicado.
+     *
+     * @param nombreClan nombre del clan
+     * @return lista de {@link PlayerStats} miembros del clan
+     */
+    public List<PlayerStats> getJugadoresByNombreClan(String nombreClan) {
+        HttpEntity<String> entity = new HttpEntity<>(headers());
+        Integer idClan = getIdClanByNombre(nombreClan);
+
+        System.out.println(">>> idClan encontrado: " + idClan); // 👈
+
+        if (idClan == null) return List.of();
+
+        ResponseEntity<PlayerStats[]> response = restTemplate.exchange(
+                url + "?id_clan=eq." + idClan,
+                HttpMethod.GET,
+                entity,
+                PlayerStats[].class
+        );
+        PlayerStats[] result = response.getBody();
+
+        System.out.println(">>> jugadores encontrados: " + (result != null ? result.length : 0)); // 👈
+
+        return result != null ? Arrays.asList(result) : List.of();
+    }
+
+    /**
+     * Cambia el id_clan del jugador
+     * @param nombreJugador
+     * @param nombreClan
+     */
+    public boolean actualizarClanJugador(String nombreJugador, String nombreClan) {
+        Integer idClan = getIdClanByNombre(nombreClan);
+
+        if (idClan == null) {
+            System.out.println(">>> No se encontró clan con nombre: " + nombreClan);
+            return false;
+        }
+
+        HttpHeaders httpHeaders = headers();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+
+        Map<String, Object> body = new HashMap<>();
+        body.put("id_clan", idClan);
+
+        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, httpHeaders);
+
+        String queryUrl = "https://fiyinrjnpkwmllzkpnsj.supabase.co/rest/v1/jugadores?username=eq." + nombreJugador.trim();
+
+        System.out.println(">>> URL PATCH: " + queryUrl);
+        System.out.println(">>> Body: " + body);
+
+        ResponseEntity<String> response = restTemplate.exchange(
+                queryUrl,
+                HttpMethod.PATCH,
+                entity,
+                String.class
+        );
+
+        System.out.println(">>> Status: " + response.getStatusCode());
+        return response.getStatusCode().is2xxSuccessful();
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<String> getAllClanes() {
+        HttpEntity<String> entity = new HttpEntity<>(headers());
+
+        String queryUrl = "https://fiyinrjnpkwmllzkpnsj.supabase.co/rest/v1/clan?select=nombre_clan";
+
+        System.out.println(">>> URL: " + queryUrl);
+
+        ResponseEntity<List<Map<String, Object>>> response = restTemplate.exchange(
+                queryUrl,
+                HttpMethod.GET,
+                entity,
+                new ParameterizedTypeReference<List<Map<String, Object>>>() {}
+        );
+
+        List<Map<String, Object>> result = response.getBody();
+        System.out.println(">>> body: " + result);
+
+        if (result == null || result.isEmpty()) return List.of();
+
+        return result.stream()
+                .map(row -> (String) row.get("nombre_clan"))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     *
+     * @param nombreClan
+     * @return
+     */
+    public boolean crearClan(String nombreClan) {
+        HttpHeaders httpHeaders = headers();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+
+        Map<String, Object> body = new HashMap<>();
+        body.put("nombre_clan", nombreClan.trim());
+
+        HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, httpHeaders);
+
+        String queryUrl = "https://fiyinrjnpkwmllzkpnsj.supabase.co/rest/v1/clan";
+
+        System.out.println(">>> URL POST: " + queryUrl);
+        System.out.println(">>> Body: " + body);
+
+        ResponseEntity<String> response = restTemplate.exchange(
+                queryUrl,
+                HttpMethod.POST,
+                entity,
+                String.class
+        );
+
+        System.out.println(">>> Status: " + response.getStatusCode());
+        return response.getStatusCode().is2xxSuccessful();
+    }
 
 }

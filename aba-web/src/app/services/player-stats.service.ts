@@ -22,13 +22,41 @@ export class PlayerStatsService {
     return this.http.get<PlayerStats>(`${this.apiUrl}/username/${username}`);
   }
 
-  // Verificar credenciales 
+  // Verificar credenciales
   comprobarContra(username: string, password: string): Observable<boolean> {
     return this.http.post<boolean>(`${this.apiUrl}/check`, { username, password });
   }
 
-  //Cambiar contraseña una vez logeado
+  // Cambiar contraseña una vez logeado
   updateContra(username: string, password: string): Observable<boolean> {
-  return this.http.patch<boolean>(`${this.apiUrl}/updateContra`, { username, password });
-}
+    return this.http.patch<boolean>(`${this.apiUrl}/updateContra`, { username, password });
+  }
+
+  // Obtener estadísticas agregadas de un clan
+  getClanStats(clanName: string): Observable<PlayerStats> {
+    return this.http.get<PlayerStats>(`${this.apiUrl}/clan/${clanName}`);
+  }
+
+  // Actualizar clan de un jugador
+  updateClan(nombreJugador: string, nombreClan: string): Observable<boolean> {
+    return this.http.patch<boolean>(
+      `${this.apiUrl}/updateClan`,
+      null,
+      { params: { nombreJugador, nombreClan } }
+    );
+  }
+
+  // Obtener todos los clanes
+  getAllClanes(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.apiUrl}/clanes`);
+  }
+
+  // Crear un nuevo clan
+  crearClan(nombreClan: string): Observable<boolean> {
+    return this.http.post<boolean>(
+      `${this.apiUrl}/crearClan`,
+      null,
+      { params: { nombreClan } }
+    );
+  }
 }

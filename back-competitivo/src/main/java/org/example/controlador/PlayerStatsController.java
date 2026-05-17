@@ -82,4 +82,70 @@ public class PlayerStatsController {
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
     }
+
+    /**
+     * Devuelve las estadísticas agregadas de todos los jugadores de un clan,
+     * sumadas como si fueran las de un único jugador.
+     *
+     * @param nombreClan nombre del clan
+     * @return {@link PlayerStats} con las estadísticas totales del clan
+     */
+    @GetMapping("/clan/{nombreClan}")
+    public ResponseEntity<PlayerStats> getClanStats(@PathVariable String nombreClan) {
+        PlayerStats resultado = playerStatsService.buscarStatsClan(nombreClan);
+        if (resultado == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(resultado);
+    }
+
+    @PatchMapping("/updateClan")
+    public ResponseEntity<Boolean> updateClan(
+            @RequestParam String nombreJugador,
+            @RequestParam String nombreClan) {
+
+        System.out.println("Jugador recibido: " + nombreJugador);
+        System.out.println("Clan recibido: " + nombreClan);
+
+        boolean resultado = playerStatsService.actualizarClanJugador(nombreJugador, nombreClan);
+
+        System.out.println("Resultado updateClan: " + resultado);
+
+        if (resultado) {
+            return ResponseEntity.ok(true);
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
+    }
+
+    /**
+     *
+     * @return
+     */
+    @GetMapping("/clanes")
+    public ResponseEntity<List<String>> getAllClanes() {
+        List<String> clanes = playerStatsService.getAllClanes();
+        if (clanes.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(clanes);
+    }
+
+    /**
+     *
+     * @param nombreClan
+     * @return
+     */
+    @PostMapping("/crearClan")
+    public ResponseEntity<Boolean> crearClan(@RequestParam String nombreClan) {
+        System.out.println("Clan a crear: " + nombreClan);
+
+        boolean resultado = playerStatsService.crearClan(nombreClan);
+
+        System.out.println("Resultado crearClan: " + resultado);
+
+        if (resultado) {
+            return ResponseEntity.ok(true);
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
+    }
 }

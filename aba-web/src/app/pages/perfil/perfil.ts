@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PlayerStatsService } from '../../services/player-stats.service';
 import { PlayerStats } from '../../models/player-stats.model';
@@ -16,41 +16,58 @@ export class Perfil implements OnInit {
 
   stats: PlayerStats | null = null;
   error = '';
+  esPropietario = false;
 
-  // --- Cambio de contraseña ---
-  mostrarModalContra = false;
   nuevaContra = '';
   confirmarContra = '';
   mensajeContra = '';
   errorContra = '';
 
+  nuevoClan = '';
+  mensajeClan = '';
+  errorClan = '';
+
+  clanAbierto = false;
+  contraAbierto = false;
+
   constructor(
     private playerStatsService: PlayerStatsService,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    const username = this.getCookie('username');
-    console.log('Cookie username:', username);
+    const usernameParam = this.route.snapshot.paramMap.get('username');
 
+    if (usernameParam) {
+      this.playerStatsService.getStatsByUsername(usernameParam).subscribe({
+        next: (data) => { this.stats = data; this.cdr.detectChanges(); },
+        error: () => { this.error = 'Jugador no encontrado'; this.cdr.detectChanges(); }
+      });
+      return;
+    }
+
+    const username = this.getCookie('username');
     if (!username) {
       this.router.navigate(['/login']);
       return;
     }
 
+    this.esPropietario = true;
+
     this.playerStatsService.getStatsByUsername(username).subscribe({
-      next: (data) => {
-        console.log('Stats recibidas:', data);
-        this.stats = data;
-        this.cdr.detectChanges();
-      },
-      error: (err) => {
-        console.log('Error stats:', err);
-        this.error = 'No se pudieron cargar las estadísticas';
-        this.cdr.detectChanges();
-      }
+      next: (data) => { this.stats = data; this.cdr.detectChanges(); },
+      error: () => { this.error = 'No se pudieron cargar las estadísticas'; this.cdr.detectChanges(); }
     });
+  }
+
+  toggleClan(): void {
+    this.clanAbierto = !this.clanAbierto;
+  }
+
+  toggleContra(): void {
+    this.contraAbierto = !this.contraAbierto;
   }
 
   logout(): void {
@@ -77,18 +94,6 @@ export class Perfil implements OnInit {
     return total === 0 ? '0%' : ((this.stats.wins / total) * 100).toFixed(1) + '%';
   }
 
-  abrirModalContra(): void {
-    this.mostrarModalContra = true;
-    this.nuevaContra = '';
-    this.confirmarContra = '';
-    this.mensajeContra = '';
-    this.errorContra = '';
-  }
-
-  cerrarModalContra(): void {
-    this.mostrarModalContra = false;
-  }
-
   cambiarContra(): void {
     this.mensajeContra = '';
     this.errorContra = '';
@@ -108,9 +113,38 @@ export class Perfil implements OnInit {
         this.mensajeContra = '¡Contraseña actualizada correctamente!';
         this.nuevaContra = '';
         this.confirmarContra = '';
+        this.cdr.detectChanges();
       },
       error: () => {
         this.errorContra = 'Error al actualizar la contraseña.';
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
+  cambiarClan(): void {
+    this.mensajeClan = '';
+    this.errorClan = '';
+
+    if (!this.nuevoClan.trim()) {
+      this.errorClan = 'Introduce el nombre del clan.';
+      return;
+    }
+
+    const username = this.getCookie('username')!;
+    this.playerStatsService.updateClan(username, this.nuevoClan.trim()).subscribe({
+      next: (resultado) => {
+        if (resultado) {
+          this.mensajeClan = `¡Te has unido al clan ${this.nuevoClan} correctamente!`;
+          this.nuevoClan = '';
+        } else {
+          this.errorClan = '❌ Clan no encontrado. Comprueba el nombre.';
+        }
+        this.cdr.detectChanges();
+      },
+      error: () => {
+        this.errorClan = '❌ Clan no encontrado. Comprueba el nombre.';
+        this.cdr.detectChanges();
       }
     });
   }

@@ -2,13 +2,14 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PlayerStatsService } from '../../services/player-stats.service';
 import { PlayerStats } from '../../models/player-stats.model';
+import { RouterLink } from '@angular/router';
 
 type Metric = 'kills' | 'deaths' | 'wins' | 'losses' | 'damage_done' | 'damage_taken' | 'time_played';
 
 @Component({
   selector: 'app-rankings',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './rankings.html',
   styleUrl: './rankings.css'
 })

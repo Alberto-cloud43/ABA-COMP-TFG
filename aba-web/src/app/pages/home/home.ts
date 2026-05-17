@@ -4,12 +4,12 @@ import { SearchBar } from '../../components/search-bar/search-bar';
 import { TopCard } from '../../components/top-card/top-card';
 import { PlayerStatsService } from '../../services/player-stats.service';
 import { PlayerStats } from '../../models/player-stats.model';
-import { BtnPerfilComponent } from '../../components/btn-perfil/btn-perfil';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, SearchBar, TopCard],
+  imports: [CommonModule, SearchBar, TopCard, RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })

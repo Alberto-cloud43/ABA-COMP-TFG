@@ -1,0 +1,48 @@
+<div class="perfil-page">
+  <ng-container *ngIf="stats">
+
+    <div class="perfil-header">
+      <div class="avatar">{{ clanName.charAt(0).toUpperCase() }}</div>
+      <div class="perfil-info">
+        <h1>{{ clanName | uppercase }}</h1>
+        <p class="since">Estadísticas totales del clan</p>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+
+      <div class="stat-card">
+        <span class="stat-label">Kills</span>
+        <span class="stat-value">{{ stats.kills }}</span>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-label">Muertes</span>
+        <span class="stat-value">{{ stats.deaths }}</span>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-label">Wins</span>
+        <span class="stat-value">{{ stats.wins }}</span>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-label">Losses</span>
+        <span class="stat-value">{{ stats.losses }}</span>
+      </div>
+
+      <div class="stat-card highlight">
+        <span class="stat-label">Tiempo jugado</span>
+        <span class="stat-value">{{ formatTime(stats.time_played) }}</span>
+      </div>
+
+    </div>
+
+    <div class="footer-actions">
+      <button class="home-btn" routerLink="/clanes-home">Volver a clanes</button>
+    </div>
+
+  </ng-container>
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+</div>

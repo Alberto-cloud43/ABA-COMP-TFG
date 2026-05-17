@@ -56,4 +56,43 @@ public class PlayerStatsService {
     public boolean updateContra(String username, String password) { return client.updateContra(username, password); }
 
     public Boolean loginComprobarContrasenia(String username, String password){ return client.loginComprobarContrasenia(username, password); }
+
+    /**
+     * Devuelve las estadísticas agregadas de todos los jugadores de un clan
+     *
+     * @param nombreClan nombre del clan
+     * @return {@link PlayerStats} con las estadísticas totales del clan
+     */
+    public PlayerStats buscarStatsClan(String nombreClan) {
+        List<PlayerStats> members = client.getJugadoresByNombreClan(nombreClan);
+
+        PlayerStats total = new PlayerStats();
+        total.setUsername(nombreClan);
+
+        for (PlayerStats p : members) {
+            total.setKills(total.getKills() + p.getKills());
+            total.setDeaths(total.getDeaths() + p.getDeaths());
+            total.setWins(total.getWins() + p.getWins());
+            total.setLosses(total.getLosses() + p.getLosses());
+            total.setWoolsPlaced(total.getWoolsPlaced() + p.getWoolsPlaced());
+            total.setPlayTime(total.getPlayTime() + p.getPlayTime());
+            total.setDamageDone(total.getDamageDone() + p.getDamageDone());
+            total.setDamageTaken(total.getDamageTaken() + p.getDamageTaken());
+        }
+
+        return total;
+    }
+
+    public Boolean actualizarClanJugador(String nombreJugador, String nombreClan) {
+        return client.actualizarClanJugador(nombreJugador, nombreClan);
+    }
+
+    public List<String> getAllClanes() {
+        return client.getAllClanes();
+    }
+
+    public boolean crearClan(String nombreJugador) {
+        return client.crearClan(nombreJugador);
+    }
+
 }
