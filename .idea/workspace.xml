@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="90b68277-9b4e-4a67-ad01-45b64035ff11" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/back-competitivo/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-competitivo/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-competitivo/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/back-competitivo/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-competitivo/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/back-competitivo/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

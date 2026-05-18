@@ -8,7 +8,8 @@ import { PlayerStats } from '../models/player-stats.model';
 })
 export class PlayerStatsService {
 
-  private apiUrl = 'http://localhost:8080/api/stats';
+  
+  private apiUrl = 'https://aba-comp-tfg.onrender.com/api/stats';
 
   constructor(private http: HttpClient) {}
 
