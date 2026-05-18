@@ -11,7 +11,6 @@
 }
 
 /* HEADER */
-
 .perfil-header {
   display: flex;
   align-items: center;
@@ -27,7 +26,6 @@
 }
 
 /* AVATAR */
-
 .avatar {
   width: 82px;
   height: 82px;
@@ -44,7 +42,6 @@
 }
 
 /* INFO */
-
 .perfil-info h1 {
   margin: 0;
   font-size: 2.2rem;
@@ -65,7 +62,6 @@
 }
 
 /* BOTONES */
-
 .home-btn {
   padding: 0.8rem 1.6rem;
   border-radius: 14px;
@@ -90,7 +86,6 @@
 }
 
 /* GRID */
-
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -98,7 +93,6 @@
 }
 
 /* CARDS */
-
 .stat-card {
   background: linear-gradient(180deg, #171717, #111111);
   border-radius: 22px;
@@ -135,9 +129,7 @@
     0 0 60px rgba(229, 9, 20, 0.06);
 }
 
-.stat-card:hover::before {
-  opacity: 1;
-}
+.stat-card:hover::before { opacity: 1; }
 
 .stat-card.highlight {
   border: 1px solid rgba(229, 9, 20, 0.35);
@@ -145,7 +137,6 @@
 }
 
 /* LABEL */
-
 .stat-label {
   color: #9c9c9c;
   font-size: 0.78rem;
@@ -154,7 +145,6 @@
 }
 
 /* VALUE */
-
 .stat-value {
   font-size: 2rem;
   font-weight: 800;
@@ -162,7 +152,6 @@
 }
 
 /* ERROR */
-
 .error {
   color: #ff4d4d;
   margin-top: 1rem;
@@ -170,26 +159,14 @@
 }
 
 /* FOOTER */
-
 .footer-actions {
   margin-top: 3rem;
   display: flex;
   justify-content: center;
 }
 
-/* Responsive */
-
-@media (max-width: 700px) {
-  .perfil-header {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .perfil-info h1 {
-    font-size: 1.8rem;
-  }
-
-  .rankings-container {
+/* TABLA JUGADORES */
+.rankings-container {
   margin-top: 3rem;
 }
 
@@ -240,9 +217,7 @@ td {
   transition: all 0.2s ease;
 }
 
-tbody tr:hover {
-  background: rgba(229, 9, 20, 0.06);
-}
+tbody tr:hover { background: rgba(229, 9, 20, 0.06); }
 
 td.rank {
   font-weight: 900;
@@ -270,4 +245,15 @@ tbody tr:nth-child(3) td.rank { color: #cd7f32; text-shadow: 0 0 12px rgba(205,1
   padding: 50px;
   color: #888;
 }
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+  .perfil-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .perfil-info h1 {
+    font-size: 1.8rem;
+  }
 }
