@@ -188,4 +188,86 @@
   .perfil-info h1 {
     font-size: 1.8rem;
   }
+
+  .rankings-container {
+  margin-top: 3rem;
+}
+
+.ranking-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 24px;
+  letter-spacing: 1px;
+}
+
+.table-wrapper {
+  background: linear-gradient(180deg, #171717, #111111);
+  border-radius: 22px;
+  border: 1px solid rgba(229, 9, 20, 0.25);
+  overflow: hidden;
+  box-shadow:
+    0 0 40px rgba(229, 9, 20, 0.12),
+    inset 0 0 20px rgba(255,255,255,0.02);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead tr {
+  background: linear-gradient(90deg, rgba(229, 9, 20, 0.22), rgba(0,0,0,0));
+}
+
+th {
+  padding: 16px 20px;
+  text-align: left;
+  font-size: 12px;
+  color: rgba(255, 120, 120, 0.95);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.col-rank     { width: 60px; }
+.col-username { width: 40%; }
+.col-value    { width: 20%; }
+
+td {
+  padding: 14px 20px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+tbody tr:hover {
+  background: rgba(229, 9, 20, 0.06);
+}
+
+td.rank {
+  font-weight: 900;
+  font-size: 16px;
+  color: #ff4d4d;
+}
+
+td.username {
+  font-weight: 700;
+  color: #ffffff;
+}
+
+td.value {
+  color: #d0d0d0;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+tbody tr:nth-child(1) td.rank { color: #ffd700; text-shadow: 0 0 12px rgba(255,215,0,0.4); }
+tbody tr:nth-child(2) td.rank { color: #c0c0c0; text-shadow: 0 0 12px rgba(192,192,192,0.3); }
+tbody tr:nth-child(3) td.rank { color: #cd7f32; text-shadow: 0 0 12px rgba(205,127,50,0.3); }
+
+.state {
+  text-align: center;
+  padding: 50px;
+  color: #888;
+}
 }

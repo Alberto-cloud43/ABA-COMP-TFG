@@ -64,4 +64,9 @@ export class PlayerStatsService {
   getClanByJugador(nombreJugador: string): Observable<string> {
     return this.http.get(`${this.apiUrl}/clan-jugador/${nombreJugador}`, { responseType: 'text' });
   }
+
+  // Obtener todos los jugadores de un clan
+  getJugadoresDeClan(nombreClan: string): Observable<PlayerStats[]> {
+    return this.http.get<PlayerStats[]>(`${this.apiUrl}/clan/${nombreClan}/jugadores`);
+  }
 }

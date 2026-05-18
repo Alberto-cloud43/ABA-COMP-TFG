@@ -99,6 +99,21 @@ public class PlayerStatsController {
         return ResponseEntity.ok(resultado);
     }
 
+    /**
+     * Devuelve la lista de jugadores del clan
+     *
+     * @param nombreClan
+     * @return
+     */
+    @GetMapping("/clan/{nombreClan}/jugadores")
+    public ResponseEntity<List<PlayerStats>> getJugadoresDeClan(@PathVariable String nombreClan) {
+        List<PlayerStats> jugadores = playerStatsService.getJugadoresDeClan(nombreClan);
+        if (jugadores.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(jugadores);
+    }
+
     @PatchMapping("/updateClan")
     public ResponseEntity<Boolean> updateClan(
             @RequestParam String nombreJugador,

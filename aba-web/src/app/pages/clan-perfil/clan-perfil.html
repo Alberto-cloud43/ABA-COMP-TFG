@@ -10,39 +10,66 @@
     </div>
 
     <div class="stats-grid">
-
       <div class="stat-card">
         <span class="stat-label">Kills</span>
         <span class="stat-value">{{ stats.kills }}</span>
       </div>
-
       <div class="stat-card">
         <span class="stat-label">Muertes</span>
         <span class="stat-value">{{ stats.deaths }}</span>
       </div>
-
       <div class="stat-card">
         <span class="stat-label">Wins</span>
         <span class="stat-value">{{ stats.wins }}</span>
       </div>
-
       <div class="stat-card">
         <span class="stat-label">Losses</span>
         <span class="stat-value">{{ stats.losses }}</span>
       </div>
-
       <div class="stat-card highlight">
         <span class="stat-label">Tiempo jugado</span>
         <span class="stat-value">{{ formatTime(stats.time_played) }}</span>
       </div>
-
     </div>
 
-    <div class="footer-actions">
-      <button class="home-btn" routerLink="/clanes-home">Volver a clanes</button>
+    <!-- LISTA DE JUGADORES -->
+    <div class="rankings-container">
+      <h2 class="ranking-title">⚔️ Miembros del clan</h2>
+      <div class="table-wrapper">
+        <p *ngIf="!jugadores.length" class="state">Cargando jugadores...</p>
+        <table *ngIf="jugadores.length">
+          <thead>
+            <tr>
+              <th class="col-rank">#</th>
+              <th class="col-username">Jugador</th>
+              <th class="col-value">Kills</th>
+              <th class="col-value">K/D</th>
+              <th class="col-value">Wins</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let j of jugadores; let i = index" [routerLink]="['/perfil', j.username]" style="cursor:pointer">
+              <td class="rank">
+                <span *ngIf="i === 0">🥇</span>
+                <span *ngIf="i === 1">🥈</span>
+                <span *ngIf="i === 2">🥉</span>
+                <span *ngIf="i > 2">{{ i + 1 }}</span>
+              </td>
+              <td class="username">{{ j.username }}</td>
+              <td class="value">{{ j.kills }}</td>
+              <td class="value">{{ j.deaths === 0 ? j.kills : (j.kills / j.deaths).toFixed(2) }}</td>
+              <td class="value">{{ j.wins }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
   </ng-container>
 
   <p class="error" *ngIf="error">{{ error }}</p>
+
+  <div class="footer-actions">
+    <button class="home-btn" routerLink="/clanes-home">Volver a clanes</button>
+  </div>
 </div>

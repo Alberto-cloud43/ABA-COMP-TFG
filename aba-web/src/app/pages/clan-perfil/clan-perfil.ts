@@ -14,6 +14,7 @@ import { PlayerStats } from '../../models/player-stats.model';
 export class ClanPerfil implements OnInit {
 
   stats: PlayerStats | null = null;
+  jugadores: PlayerStats[] = [];
   clanName = '';
   error = '';
 
@@ -34,6 +35,11 @@ export class ClanPerfil implements OnInit {
     this.playerStatsService.getClanStats(this.clanName).subscribe({
       next: (data) => { this.stats = data; this.cdr.detectChanges(); },
       error: () => { this.error = 'No se pudieron cargar las estadísticas del clan'; this.cdr.detectChanges(); }
+    });
+
+    this.playerStatsService.getJugadoresDeClan(this.clanName).subscribe({
+      next: (data) => { this.jugadores = data; this.cdr.detectChanges(); },
+      error: () => { this.jugadores = []; }
     });
   }
 

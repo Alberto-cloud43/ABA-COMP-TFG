@@ -83,6 +83,17 @@ public class PlayerStatsService {
         return total;
     }
 
+    /**
+     * Saca todos los jugadores de un clan
+     * @param nombreClan
+     * @return
+     */
+    public List<PlayerStats> getJugadoresDeClan(String nombreClan) {
+        return client.getJugadoresByNombreClan(nombreClan);
+    }
+
+
+
     public Boolean actualizarClanJugador(String nombreJugador, String nombreClan) {
         return client.actualizarClanJugador(nombreJugador, nombreClan);
     }
